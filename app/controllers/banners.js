@@ -6,6 +6,23 @@ const controllerName = 'banners';
 const MainModel = require(__path_models + controllerName);
 
 module.exports = {
+    getAllBanners: async(req, res, next) => {
+        try {
+            let params = [];
+            params.keyword = req.query.keyword;
+            params.sortField = req.query.orderBy;
+            params.sortType = req.query.orderDir;
+
+            const data = await MainModel.listBanners(params, { 'task': 'all' });
+
+            res.status(200).json({
+                success: true,
+                data: data
+            })
+        } catch (error) {
+            res.status(400).json({ success: false })
+        }
+    },
     addBanner: async(req, res, next) => {
         try {
             let param = {};
