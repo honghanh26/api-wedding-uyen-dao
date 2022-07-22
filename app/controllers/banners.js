@@ -54,13 +54,16 @@ module.exports = {
                 data: data
             })
         } catch (error) {
-            console.log(error);
             res.status(400).json({ success: false })
         }
     },
     editBanner: async(req, res, next) => {
         try {
             let body = req.body;
+            body.img = {
+                data: fs.readFileSync(path.join(__path_uploads + req.file.filename)),
+                contentType: req.file.mimetype
+            };
             const data = await MainModel.editBanner({ 'id': req.params.id, 'body': body }, { 'task': 'edit' });
 
             res.status(200).json({
