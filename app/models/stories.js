@@ -1,7 +1,7 @@
-const MainModel = require(__path_schemas + 'banners');
+const MainModel = require(__path_schemas + 'stories');
 
 module.exports = {
-    listBanners: (params, option) => {
+    listStories: (params, option) => {
         let sort = {};
         let objWhere = {};
         if (params.keyword !== '') objWhere.name = new RegExp(params.keyword, 'i');
@@ -10,19 +10,19 @@ module.exports = {
         if (option.task == 'all') {
             return MainModel
                 .find(objWhere)
-                .select('id name description img')
+                .select('id name description date')
                 .sort(sort)
         }
         if (option.task == 'one') {
             return MainModel
                 .find({ id: params.id })
-                .select('id name description img')
+                .select('id name description date')
         }
     },
     create: (item) => {
         return new MainModel(item).save();
     },
-    editBanner: (params, option) => {
+    editStory: (params, option) => {
         if (option.task == 'edit') {
             return MainModel
                 .updateOne({ id: params.id }, params.body);

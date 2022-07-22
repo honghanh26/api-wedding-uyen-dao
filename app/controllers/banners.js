@@ -23,6 +23,18 @@ module.exports = {
             res.status(400).json({ success: false })
         }
     },
+    getBanner: async(req, res, next) => {
+        try {
+            const data = await MainModel.listBanners({ 'id': req.params.id }, { 'task': 'one' });
+
+            res.status(200).json({
+                success: true,
+                data: data
+            })
+        } catch (error) {
+            res.status(400).json({ success: false })
+        }
+    },
     addBanner: async(req, res, next) => {
         try {
             let param = {};
@@ -43,6 +55,19 @@ module.exports = {
             })
         } catch (error) {
             console.log(error);
+            res.status(400).json({ success: false })
+        }
+    },
+    editBanner: async(req, res, next) => {
+        try {
+            let body = req.body;
+            const data = await MainModel.editBanner({ 'id': req.params.id, 'body': body }, { 'task': 'edit' });
+
+            res.status(200).json({
+                success: true,
+                data: data
+            })
+        } catch (error) {
             res.status(400).json({ success: false })
         }
     }
