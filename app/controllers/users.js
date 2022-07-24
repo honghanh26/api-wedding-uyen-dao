@@ -43,10 +43,12 @@ module.exports = {
             param.name = req.body.name;
             param.description = req.body.description;
             param.role = req.body.role;
-            param.img = {
-                data: fs.readFileSync(path.join(__path_uploads + req.file.filename)),
-                contentType: req.file.mimetype
-            };
+            if(req.file) {
+                param.img = {
+                    data: fs.readFileSync(path.join(__path_uploads + req.file.filename)),
+                    contentType: req.file.mimetype
+                };
+            }
 
             const data = await MainModel.create(param);
 
@@ -61,10 +63,12 @@ module.exports = {
     editUser: async(req, res, next) => {
         try {
             let body = req.body;
-            body.img = {
-                data: fs.readFileSync(path.join(__path_uploads + req.file.filename)),
-                contentType: req.file.mimetype
-            };
+            if(req.file) {
+                body.img = {
+                    data: fs.readFileSync(path.join(__path_uploads + req.file.filename)),
+                    contentType: req.file.mimetype
+                };
+            }
             const data = await MainModel.editUser({ 'id': req.params.id, 'body': body }, { 'task': 'edit' });
 
             res.status(200).json({
