@@ -1,6 +1,4 @@
 var express = require('express');
-var fs = require('fs');
-var path = require('path');
 
 const controllerName = 'banners';
 const MainModel = require(__path_models + controllerName);
@@ -42,10 +40,9 @@ module.exports = {
             param.id = makeId(8);
             param.name = req.body.name;
             param.description = req.body.description;
-            param.img = {
-                data: fs.readFileSync(path.join(__path_uploads + req.file.filename)),
-                contentType: req.file.mimetype
-            };
+            if(req.file) {
+                param.img = req.file.filename;
+            }
 
             const data = await MainModel.create(param);
 
@@ -60,10 +57,9 @@ module.exports = {
     editBanner: async(req, res, next) => {
         try {
             let body = req.body;
-            body.img = {
-                data: fs.readFileSync(path.join(__path_uploads + req.file.filename)),
-                contentType: req.file.mimetype
-            };
+            if(req.file) {
+                body.img = req.file.filename;
+            }
             const data = await MainModel.editBanner({ 'id': req.params.id, 'body': body }, { 'task': 'edit' });
 
             res.status(200).json({

@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 var app = express();
 app.use(express.json());
 app.use(cors());
+app.use('/uploads', express.static('app/uploads'));
 require('dotenv/config');
 
 const pathConfig = require('./path');

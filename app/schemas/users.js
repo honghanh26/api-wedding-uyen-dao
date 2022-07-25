@@ -6,10 +6,11 @@ var schema = new mongoose.Schema({
     name: String,
     description: String,
     role: String,
-    img: {
-        data: Buffer,
-        contentType: String
-    }
+    img: String
+    // img: {
+    //     data: Buffer,
+    //     contentType: String
+    // }
 });
 
 module.exports = mongoose.model(databaseConfig.col_users, schema);

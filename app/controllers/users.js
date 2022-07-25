@@ -1,6 +1,6 @@
 var express = require('express');
-var fs = require('fs');
-var path = require('path');
+// var fs = require('fs');
+// var path = require('path');
 
 const controllerName = 'users';
 const MainModel = require(__path_models + controllerName);
@@ -44,10 +44,11 @@ module.exports = {
             param.description = req.body.description;
             param.role = req.body.role;
             if(req.file) {
-                param.img = {
-                    data: fs.readFileSync(path.join(__path_uploads + req.file.filename)),
-                    contentType: req.file.mimetype
-                };
+                // param.img = {
+                //     data: fs.readFileSync(path.join(__path_uploads + req.file.filename)),
+                //     contentType: req.file.mimetype
+                // };
+                param.img = req.file.filename;
             }
 
             const data = await MainModel.create(param);
@@ -64,10 +65,7 @@ module.exports = {
         try {
             let body = req.body;
             if(req.file) {
-                body.img = {
-                    data: fs.readFileSync(path.join(__path_uploads + req.file.filename)),
-                    contentType: req.file.mimetype
-                };
+                body.img = req.file.filename;
             }
             const data = await MainModel.editUser({ 'id': req.params.id, 'body': body }, { 'task': 'edit' });
 

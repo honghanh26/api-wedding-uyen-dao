@@ -12,10 +12,7 @@ var schema = new mongoose.Schema({
             return Date.now();
         }
     },
-    img: {
-        data: Buffer,
-        contentType: String
-    }
+    img: String
 });
 
 module.exports = mongoose.model(databaseConfig.col_events, schema);
