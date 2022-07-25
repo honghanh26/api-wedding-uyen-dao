@@ -1,6 +1,4 @@
 var express = require('express');
-var fs = require('fs');
-var path = require('path');
 
 const controllerName = 'events';
 const MainModel = require(__path_models + controllerName);
@@ -42,10 +40,11 @@ module.exports = {
             param.id = makeId(8);
             param.name = req.body.name;
             param.description = req.body.description;
-            param.img = {
-                data: fs.readFileSync(path.join(__path_uploads + req.file.filename)),
-                contentType: req.file.mimetype
-            };
+            param.location = req.body.location;
+            param.date = req.body.date;
+            if(req.file) {
+                param.img = req.file.filename;
+            }
 
             const data = await MainModel.create(param);
 
@@ -54,13 +53,15 @@ module.exports = {
                 data: data
             })
         } catch (error) {
-            console.log(error);
             res.status(400).json({ success: false })
         }
     },
     editEvent: async(req, res, next) => {
         try {
             let body = req.body;
+            if(req.file) {
+                body.img = req.file.filename;
+            }
             const data = await MainModel.editEvent({ 'id': req.params.id, 'body': body }, { 'task': 'edit' });
 
             res.status(200).json({

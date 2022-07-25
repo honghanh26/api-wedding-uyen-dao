@@ -48,7 +48,6 @@ module.exports = {
                 data: data
             })
         } catch (error) {
-            console.log(error);
             res.status(400).json({ success: false })
         }
     },
