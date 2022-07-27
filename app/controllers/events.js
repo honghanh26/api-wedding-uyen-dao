@@ -1,4 +1,5 @@
 var express = require('express');
+var nodemailer =  require('nodemailer');
 
 const controllerName = 'events';
 const MainModel = require(__path_models + controllerName);
@@ -71,6 +72,39 @@ module.exports = {
         } catch (error) {
             res.status(400).json({ success: false })
         }
+    },
+    sendMail: (req, res, next) => {
+        var transporter = nodemailer.createTransport({ // config mail server
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false,
+            requireTLS: true,
+            auth: {
+                user: 'uyendaowedding@gmail.com',
+                pass: 'lazhwpsjztrzymjs' //uyendaowedding2509
+            }
+        });
+        var mainOptions = { // thiết lập đối tượng, nội dung gửi mail
+            from: req.body.email,
+            to: 'uyendaowedding@gmail.com',
+            subject: 'Tham Dự Tiệc',
+            html: '<p>You have got a new message</b>\
+                    <ul><li>Tên:' + req.body.name + '</li>\
+                    <li>Email:' + req.body.email + '</li>\
+                    <li>Số khách:' + req.body.guest + '</li>\
+                    <li>Tham dự tiệc:' + req.body.event + '</li>\
+                    <li>Ghi chú:' + req.body.message + '</li></ul>'
+        }
+        transporter.sendMail(mainOptions, function(err, info){
+            if (err) {
+                res.status(400).json({ success: false })
+            } else {
+                res.status(200).json({
+                    success: true,
+                    data: info
+                })
+            }
+        });
     }
 }
 

@@ -9,5 +9,6 @@ router.get('/', eventsController.getAllEvents);
 router.get('/:id', eventsController.getEvent);
 router.post('/add', upload.single('img'), eventsController.addEvent);
 router.put('/edit/:id', upload.single('img'), eventsController.editEvent);
+router.post('/send', eventsController.sendMail);
 
 module.exports = router;
