@@ -88,12 +88,12 @@ module.exports = {
             from: req.body.email,
             to: 'uyendaowedding@gmail.com',
             subject: 'Tham Dự Tiệc',
-            html: '<p>You have got a new message</b>\
-                    <ul><li>Tên:' + req.body.name + '</li>\
-                    <li>Email:' + req.body.email + '</li>\
-                    <li>Số khách:' + req.body.guest + '</li>\
-                    <li>Tham dự tiệc:' + req.body.event + '</li>\
-                    <li>Ghi chú:' + req.body.message + '</li></ul>'
+            html: '<p>Bạn có 1 tin nhắn mới</b>\
+                    <ul><li>Tên: ' + req.body.name + '</li>\
+                    <li>Email: ' + req.body.email + '</li>\
+                    <li>Số khách: ' + req.body.guest + '</li>\
+                    <li>Tham dự tiệc: ' + req.body.event + '</li>\
+                    <li>Ghi chú: ' + req.body.message + '</li></ul>'
         }
         transporter.sendMail(mainOptions, function(err, info){
             if (err) {
