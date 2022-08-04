@@ -37,7 +37,7 @@ module.exports = {
         try {
             let param = {};
 
-            param.id = makeId(8);
+            // param.id = makeId(8);
             param.name = req.body.name;
             param.description = req.body.description;
             if(req.files) {

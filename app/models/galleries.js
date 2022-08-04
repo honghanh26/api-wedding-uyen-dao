@@ -10,13 +10,13 @@ module.exports = {
         if (option.task == 'all') {
             return MainModel
                 .find(objWhere)
-                .select('id name description img')
+                .select('_id name description img')
                 .sort(sort)
         }
         if (option.task == 'one') {
             return MainModel
-                .find({ id: params.id })
-                .select('id name description img')
+                .find({ _id: params.id })
+                .select('_id name description img')
         }
     },
     create: (item) => {
@@ -25,7 +25,7 @@ module.exports = {
     editGallery: (params, option) => {
         if (option.task == 'edit') {
             return MainModel
-                .updateOne({ id: params.id }, params.body);
+                .updateOne({ _id: params.id }, params.body);
         }
     }
 }
