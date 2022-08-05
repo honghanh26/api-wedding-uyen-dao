@@ -60,18 +60,14 @@ module.exports = {
     editGallery: async(req, res, next) => {
         try {
             let body = req.body;
-            let idx = body.index;
-            body.img = body?.img ?? [];
+            let idx = body.index ? JSON.parse(body.index) : [];
+            body.img = body?.img ? (typeof body.img === "string" ? JSON.parse('["' + body.img + '"]') : body.img) : [];
 
             if(req.files) {
                 req.files.forEach((item) => {
                     if(idx && idx.length > 0) {
                         body.img.splice(idx[0], 0, item.filename);
-                        if(typeof idx === "string") {
-                            idx = [];
-                        } else {
-                            idx.splice(0, 1);
-                        }
+                        idx.splice(0, 1);
                     } else {
                         body.img.push(item.filename);
                     }
