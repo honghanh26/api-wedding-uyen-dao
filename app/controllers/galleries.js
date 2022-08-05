@@ -54,20 +54,32 @@ module.exports = {
                 data: data
             })
         } catch (error) {
-            console.log(error);
             res.status(400).json({ success: false })
         }
     },
     editGallery: async(req, res, next) => {
         try {
             let body = req.body;
-            // if(req.files) {
-            //     body.img = [];
-            //     req.files.forEach((item) => {
-            //         param.img.push(item.filename);
-            //     })
-            // }
-            const data = await MainModel.editGalley({ 'id': req.params.id, 'body': body }, { 'task': 'edit' });
+            let idx = body.index;
+            body.img = body?.img ?? [];
+
+            if(req.files) {
+                req.files.forEach((item) => {
+                    if(idx && idx.length > 0) {
+                        body.img.splice(idx[0], 0, item.filename);
+                        if(typeof idx === "string") {
+                            idx = [];
+                        } else {
+                            idx.splice(0, 1);
+                        }
+                    } else {
+                        body.img.push(item.filename);
+                    }
+                })
+            }
+
+            delete body.index;
+            const data = await MainModel.editGallery({ 'id': req.params.id, 'body': body }, { 'task': 'edit' });
 
             res.status(200).json({
                 success: true,
