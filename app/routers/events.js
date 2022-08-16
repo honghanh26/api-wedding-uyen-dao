@@ -7,8 +7,8 @@ const eventsController = require(__path_controllers + controllerName);
 
 router.get('/', eventsController.getAllEvents);
 router.get('/:id', eventsController.getEvent);
-router.post('/add', upload.single('img'), eventsController.addEvent);
-router.put('/edit/:id', upload.single('img'), eventsController.editEvent);
-router.post('/send', eventsController.sendMail);
+router.post('/', upload.single('img'), eventsController.addEvent);
+router.put('/:id', upload.single('img'), eventsController.editEvent);
+router.post('/mail', eventsController.sendMail);
 
 module.exports = router;

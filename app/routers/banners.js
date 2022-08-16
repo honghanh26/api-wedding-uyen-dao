@@ -7,7 +7,7 @@ const bannerController = require(__path_controllers + controllerName);
 
 router.get('/', bannerController.getAllBanners);
 router.get('/:id', bannerController.getBanner);
-router.post('/add', upload.single('img'), bannerController.addBanner);
-router.put('/edit/:id', upload.single('img'), bannerController.editBanner);
+router.post('/', upload.single('img'), bannerController.addBanner);
+router.put('/:id', upload.single('img'), bannerController.editBanner);
 
 module.exports = router;

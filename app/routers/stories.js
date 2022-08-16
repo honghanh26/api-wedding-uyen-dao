@@ -6,7 +6,7 @@ const storyController = require(__path_controllers + controllerName);
 
 router.get('/', storyController.getAllStories);
 router.get('/:id', storyController.getStory);
-router.post('/add', storyController.addStory);
-router.put('/edit/:id', storyController.editStory);
+router.post('/', storyController.addStory);
+router.put('/:id', storyController.editStory);
 
 module.exports = router;

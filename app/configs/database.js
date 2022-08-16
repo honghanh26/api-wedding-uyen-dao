@@ -1,7 +1,7 @@
 module.exports = {
     username: 'hanhcao',
     password: 'hanhcao',
-    database: 'api_project',
+    database: 'api_demo',
     col_users: 'users',
     col_banners: 'banners',
     col_events: 'events',
