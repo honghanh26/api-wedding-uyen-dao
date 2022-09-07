@@ -9,6 +9,7 @@ router.get('/', eventsController.getAllEvents);
 router.get('/:id', eventsController.getEvent);
 router.post('/', upload.single('img'), eventsController.addEvent);
 router.put('/:id', upload.single('img'), eventsController.editEvent);
+router.delete('/:id', eventsController.deleteEvent);
 router.post('/mail', eventsController.sendMail);
 
 module.exports = router;

@@ -9,5 +9,6 @@ router.get('/', galleryController.getAllGalleries);
 router.get('/:id', galleryController.getGallery);
 router.post('/', upload.array('img', 10), galleryController.addGallery);
 router.put('/:id', upload.array('img', 10), galleryController.editGallery);
+router.delete('/:id', galleryController.deleteGallery);
 
 module.exports = router;

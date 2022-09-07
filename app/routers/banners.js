@@ -9,5 +9,6 @@ router.get('/', bannerController.getAllBanners);
 router.get('/:id', bannerController.getBanner);
 router.post('/', upload.single('img'), bannerController.addBanner);
 router.put('/:id', upload.single('img'), bannerController.editBanner);
+router.delete('/:id', bannerController.deleteBanner);
 
 module.exports = router;

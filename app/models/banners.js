@@ -27,5 +27,11 @@ module.exports = {
             return MainModel
                 .updateOne({ id: params.id }, params.body);
         }
+    },
+    deleteBanners: (params, option) => {
+        if (option.task == 'one') {
+            return MainModel
+                .deleteOne({ id: params.id })
+        }
     }
 }

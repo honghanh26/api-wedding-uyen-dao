@@ -69,6 +69,18 @@ module.exports = {
         } catch (error) {
             res.status(400).json({ success: false })
         }
+    },
+    deleteBanner: async(req, res, next) => {
+        try {
+            const data = await MainModel.deleteBanners({ 'id': req.params.id }, { 'task': 'one' });
+
+            res.status(200).json({
+                success: true,
+                data: data
+            })
+        } catch (error) {
+            res.status(400).json({ success: false })
+        }
     }
 }
 

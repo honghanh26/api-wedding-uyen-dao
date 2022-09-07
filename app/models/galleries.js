@@ -27,5 +27,11 @@ module.exports = {
             return MainModel
                 .updateOne({ _id: params.id }, params.body);
         }
+    },
+    deleteGalleries: (params, option) => {
+        if (option.task == 'one') {
+            return MainModel
+                .deleteOne({ id: params.id })
+        }
     }
 }

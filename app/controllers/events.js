@@ -73,6 +73,18 @@ module.exports = {
             res.status(400).json({ success: false })
         }
     },
+    deleteEvent: async(req, res, next) => {
+        try {
+            const data = await MainModel.deleteEvents({ 'id': req.params.id }, { 'task': 'one' });
+
+            res.status(200).json({
+                success: true,
+                data: data
+            })
+        } catch (error) {
+            res.status(400).json({ success: false })
+        }
+    },
     sendMail: (req, res, next) => {
         var transporter = nodemailer.createTransport({ // config mail server
             host: 'smtp.gmail.com',
