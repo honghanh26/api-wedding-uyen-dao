@@ -40,6 +40,7 @@ module.exports = {
             param.id = makeId(8);
             param.name = req.body.name;
             param.description = req.body.description;
+            param.date = req.body.date;
 
             const data = await MainModel.create(param);
 
